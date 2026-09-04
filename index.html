@@ -357,7 +357,7 @@
         <div class="stat-list">
           <div class="stat"><div class="stat-num">2 ans</div><div class="stat-label">Expérience terrain en support &amp; réseau</div></div>
           <div class="stat"><div class="stat-num">7</div><div class="stat-label">Certifications obtenues</div></div>
-          <div class="stat"><div class="stat-num">9</div><div class="stat-label">Projets techniques documentés</div></div>
+          <div class="stat"><div class="stat-num">10</div><div class="stat-label">Projets techniques documentés</div></div>
           <div class="stat"><div class="stat-num">4</div><div class="stat-label">Langues de travail : FR, EN, wolof, peulh</div></div>
           <div class="stat"><div class="stat-num">150</div><div class="stat-label">Arbres plantés depuis 2022</div></div>
         </div>
@@ -523,13 +523,21 @@
     <div class="wrap">
       <div class="section-head reveal">
         <div class="eyebrow">Projets techniques</div>
-        <h2>Neuf projets, du réseau à l'IA</h2>
+        <h2>Dix projets, du réseau à l'IA</h2>
         <p>Rapports complets et code disponibles sur GitHub.</p>
       </div>
       <div class="project-grid reveal">
 
         <div class="proj-card">
           <div class="proj-num">01</div>
+          <h3>Services réseau conteneurisés sur EVE-NG</h3>
+          <p>Maquette Cisco complète où DHCP relayé, DNS de zone locale et supervision SNMP tournent en conteneurs Docker sur une seule VM : 350 Mo de RAM au total, contre 2 Go pour quatre machines virtuelles. Router-on-a-stick, trunk 802.1Q, tableau de bord Grafana provisionné.</p>
+          <div class="proj-tags"><span class="proj-tag">Docker</span><span class="proj-tag">EVE-NG</span><span class="proj-tag">SNMP</span></div>
+          <a href="https://github.com/SHERLOCKSOW/services-reseau-conteneurises" target="_blank" rel="noopener" class="proj-link">&rarr; GitHub</a>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-num">02</div>
           <h3>Interconnexion MPLS L3VPN</h3>
           <p>Infrastructure opérateur reliant 3 sites (Dakar, Thiès, Ziguinchor) : VRF, MP-BGP, OSPF+LDP, EIGRP PE-CE et authentification MD5. Rapport technique de 43 pages, simulé sous GNS3/EVE-NG.</p>
           <div class="proj-tags"><span class="proj-tag">MPLS</span><span class="proj-tag">BGP</span><span class="proj-tag">VRF</span></div>
@@ -537,7 +545,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-num">02</div>
+          <div class="proj-num">03</div>
           <h3>Infrastructure hybride automatisée</h3>
           <p>Lab d'entreprise sous EVE-NG : Cisco + pfSense + Linux, piloté par Ansible. Déploiement de clés SSH, playbooks de configuration et sauvegardes horodatées, temps de déploiement réduit à quelques minutes.</p>
           <div class="proj-tags"><span class="proj-tag">Ansible</span><span class="proj-tag">pfSense</span><span class="proj-tag">Cisco</span></div>
@@ -545,7 +553,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-num">03</div>
+          <div class="proj-num">04</div>
           <h3>Automatisation infra multi-serveurs</h3>
           <p>Automatisation d'une infrastructure multi-serveurs (VPS + conteneurs LXD) avec Ansible : inventaire, playbooks et scripts pour un déploiement cohérent et reproductible.</p>
           <div class="proj-tags"><span class="proj-tag">Ansible</span><span class="proj-tag">LXD</span><span class="proj-tag">VPS</span></div>
@@ -553,7 +561,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-num">04</div>
+          <div class="proj-num">05</div>
           <h3>Solveur numérique : équation de la chaleur</h3>
           <p>Résolution numérique de l'équation de la chaleur 1D par schéma FTCS, simulant l'évolution de la température dans une barre isolée. Interface interactive avec ipywidgets sur Google Colab.</p>
           <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Calcul numérique</span></div>
@@ -561,7 +569,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-num">05</div>
+          <div class="proj-num">06</div>
           <h3>Modèle IA de détection de malware</h3>
           <p>Entraînement d'un modèle de machine learning pour la classification et la détection de logiciels malveillants à partir de caractéristiques extraites de fichiers.</p>
           <div class="proj-tags"><span class="proj-tag">Machine Learning</span><span class="proj-tag">Sécurité</span></div>
@@ -569,7 +577,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-num">06</div>
+          <div class="proj-num">07</div>
           <h3>Guide : compilation du noyau Linux</h3>
           <p>Guide pratique de compilation du noyau Linux et d'administration système : configuration, compilation, installation et dépannage d'un noyau personnalisé.</p>
           <div class="proj-tags"><span class="proj-tag">Linux</span><span class="proj-tag">Sysadmin</span></div>
@@ -577,7 +585,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-num">07</div>
+          <div class="proj-num">08</div>
           <h3>Projet SGBD : architecture distribuée</h3>
           <p>Conception d'une architecture de base de données distribuée autour d'OSCommerce, incluant réplication et répartition de charge entre plusieurs nœuds.</p>
           <div class="proj-tags"><span class="proj-tag">SGBD</span><span class="proj-tag">Architecture distribuée</span></div>
@@ -585,7 +593,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-num">08</div>
+          <div class="proj-num">09</div>
           <h3>Résolution algorithmique du Rubik's Cube</h3>
           <p>Implémentation d'un algorithme de résolution automatique du Rubik's Cube, de la représentation d'état à la recherche de solution.</p>
           <div class="proj-tags"><span class="proj-tag">Algorithmique</span><span class="proj-tag">Python</span></div>
@@ -593,7 +601,7 @@
         </div>
 
         <div class="proj-card">
-          <div class="proj-num">09</div>
+          <div class="proj-num">10</div>
           <h3>Sudoku interactif</h3>
           <p>Sudoku interactif jouable et résoluble automatiquement, développé sur Google Colab avec une interface utilisateur intégrée.</p>
           <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Algorithmique</span></div>
