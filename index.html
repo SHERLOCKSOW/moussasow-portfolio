@@ -339,7 +339,31 @@
 .x-flow span.on{background:var(--accent); color:#fff; border-color:var(--accent); transform:translateY(-2px);}
 .x-flow i{color:var(--ink-faint); font-style:normal;}
 </style>
-</head>
+<style>
+.xp{border:1px solid var(--line); background:var(--paper); margin-bottom:14px; transition:.25s; position:relative; overflow:hidden;}
+.xp:hover,.x-tile:hover{border-color:var(--accent);}
+.xp::before,.x-tile::before{content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:.3s; background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%), rgba(38,80,163,.10), transparent 70%);}
+.xp:hover::before,.x-tile:hover::before{opacity:1;} .x-tile{position:relative; overflow:hidden;}
+.xp summary{list-style:none; cursor:pointer; padding:18px 22px; display:grid; grid-template-columns:190px 1fr auto; gap:6px 20px; align-items:baseline;}
+.xp summary::-webkit-details-marker{display:none;}
+.xp summary::after{content:'+'; font-family:var(--mono); font-size:20px; color:var(--accent); grid-column:3; grid-row:1/3;}
+.xp[open] summary::after{content:'−';}
+.xp-date{font-family:var(--mono); font-size:12px; color:var(--ink-faint);}
+.xp-role{font-family:var(--display); font-weight:600; font-size:17px;}
+.xp-org{grid-column:2; font-family:var(--mono); font-size:12px; color:var(--accent);}
+.xp-body{padding:0 22px 22px 22px; margin-left:210px;} .xp-body p{color:var(--ink-soft); font-size:14px; margin-bottom:10px;}
+.xp-body ul{margin:0 0 14px 18px; color:var(--ink-soft); font-size:14px; line-height:1.65;}
+.xp-lbl{font-family:var(--mono); font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; margin:10px 0 6px;}
+.xp-chips{display:flex; flex-wrap:wrap; gap:7px;} .xp-chips span{font-family:var(--mono); font-size:12px; padding:4px 10px; border:1px solid var(--line);}
+.xp-chips.res span{background:rgba(38,80,163,.10); border-color:var(--accent); color:var(--accent-deep);}
+@media(max-width:760px){.xp summary{grid-template-columns:1fr auto;} .xp-org{grid-column:1;} .xp-body{margin-left:0;}}
+.hero{position:relative; overflow:hidden;} .hero>*{position:relative; z-index:1;} #xnet{position:absolute!important; inset:0; width:100%; height:100%; z-index:0!important; pointer-events:none; opacity:.55;}
+.navlinks a.active{color:var(--accent);}
+#xpal{position:fixed; inset:0; background:rgba(8,12,18,.55); z-index:300; display:none; align-items:flex-start; justify-content:center; padding-top:14vh;}
+#xpal.on{display:flex;} #xpal .box{width:min(560px,92vw); background:var(--paper); border:1px solid var(--line); box-shadow:0 20px 60px rgba(0,0,0,.35);}
+#xpal input{width:100%; padding:16px 18px; border:0; border-bottom:1px solid var(--line); background:none; color:var(--ink); font-family:var(--mono); font-size:15px; outline:none;}
+#xpal a{display:block; padding:11px 18px; font-family:var(--mono); font-size:13px; color:var(--ink-soft); cursor:pointer;} #xpal a.sel,#xpal a:hover{background:var(--paper-raised); color:var(--accent);}
+</style></head>
 <body>
 
 <header>
@@ -355,7 +379,7 @@
       <a href="#projets">Projets</a>
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
-      <span class="x-tools"><a href="en/" hreflang="en">EN</a><button id="themeBtn" aria-label="Theme">◐</button></span>
+      <span class="x-tools"><a href="en/" hreflang="en">EN</a><button id="palBtn" aria-label="Menu">⌘K</button><button id="themeBtn" aria-label="Theme">◐</button></span>
     </div>
     <button class="navtoggle" id="navtoggle" aria-label="Menu"><span></span></button>
   </nav>
@@ -363,7 +387,7 @@
 
 <main id="top">
 
-  <section class="hero" style="padding-bottom:0;">
+  <section class="hero" style="padding-bottom:0;"><canvas id="xnet" aria-hidden="true"></canvas>
     <div class="blueprint-bg"></div>
     <div class="wrap">
       <div class="hero-grid">
@@ -446,20 +470,12 @@
     </div>
   </section>
 
-  <section id="experience">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow">Expérience</div>
-        <h2>Parcours professionnel</h2>
-      </div>
-      <div class="timeline reveal">
-        <div class="tl-item"><div class="tl-date">15 sept. 2026 à présent</div><div><div class="tl-role">Stagiaire Cloud &amp; DevOps (infrastructures)</div><div class="tl-org">InTouch</div><p>Déploiement, maintenance et mise à l'échelle d'infrastructures hébergées sur Google Cloud, avec une partie sur AWS : Compute Engine, réseau, conteneurs Docker et Kubernetes, infrastructure as code avec Terraform, templates Jinja2 et pipelines GitLab CI.</p></div></div>
-        <div class="tl-item"><div class="tl-date">Oct. 2024 à Présent</div><div><div class="tl-role">Enseignant particulier en mathématiques</div><div class="tl-org">Indépendant, Rufisque</div><p>Évaluation des besoins spécifiques d'élèves de collège et lycée, plans de progression individualisés, préparation aux examens.</p></div></div>
-        <div class="tl-item"><div class="tl-date">Mai 2023 à Avr. 2025</div><div><div class="tl-role">Responsable Informatique</div><div class="tl-org">Multiservices Le Binaire, Rufisque</div><p>Support informatique de proximité, gestion du réseau local, caméras de surveillance, sécurisation d'archives administratives numériques.</p></div></div>
-        <div class="tl-item"><div class="tl-date">2023 à 2024</div><div><div class="tl-role">Assistant pédagogique</div><div class="tl-org">Université USSEIN</div><p>Encadrement en analyse et algèbre, +15% de moyenne pour les étudiants suivis. Création de supports numériques interactifs.</p></div></div>
-      </div>
-    </div>
-  </section>
+  <section id="experience"><div class="wrap"><div class="section-head reveal"><div class="eyebrow">Expérience</div><h2>Ce que j'ai concrètement fait</h2></div><details class="xp reveal" open><summary><span class="xp-date">15 sept. 2026 à présent</span><span class="xp-role">Stagiaire Infrastructure Cloud &amp; DevOps</span><span class="xp-org">InTouch</span></summary><div class="xp-body"><p>Équipe infrastructure d'un environnement hébergé sur Google Cloud, avec une partie sur AWS.</p><ul><li>Déploiement et maintenance de ressources sur Compute Engine : réseau, sous-réseaux et règles de pare-feu.</li><li>Infrastructure décrite en Terraform, configurations générées avec des templates Jinja2, pour des environnements reproductibles.</li><li>Pipelines GitLab CI pour construire les images Docker et déployer.</li><li>Déploiement et exploitation d'applications conteneurisées sur Kubernetes, avec mise à l'échelle.</li><li>Approche systèmes distribués : disponibilité, répartition de charge, maintenance au quotidien.</li></ul><div class="xp-lbl">Stack</div><div class="xp-chips "><span>GCP</span><span>AWS</span><span>Terraform</span><span>Kubernetes</span><span>Docker</span><span>GitLab CI</span><span>Jinja2</span></div></div></details>
+<details class="xp reveal" open><summary><span class="xp-date">Sept. 2026</span><span class="xp-role">Développeur full-stack freelance</span><span class="xp-org">WayPoint Sénégal</span></summary><div class="xp-body"><p>Plateforme web de collecte de données pour une administration publique, de la conception à la mise en production.</p><ul><li>Reproduction fidèle de deux canevas Excel officiels en formulaires web, avec listes en cascade et validation côté serveur.</li><li>Exports Excel, Word et PDF automatiques, dont un rapport statistique rédigé à partir des chiffres.</li><li>Tableau de bord d'une vingtaine de graphiques, filtres par année, impression.</li><li>Sécurité : protection CSRF, hachage PBKDF2, blocage après échecs de connexion, journal des accès.</li><li>Application installable sur téléphone (PWA), brouillon conservé si la connexion coupe, sauvegarde à trois niveaux.</li><li>Audit des canevas officiels : cinq anomalies repérées et corrigées, dont un module masqué que personne n'avait signalé.</li><li>Hébergement, SSL et mise en production sur serveur mutualisé.</li></ul><div class="xp-lbl">Résultats</div><div class="xp-chips res"><span>20 000 fiches testées</span><span>12 agents en simultané, 0 échec</span><span>Export Excel : 48 s → 7 s</span><span>245 champs modélisés</span></div><div class="xp-lbl">Stack</div><div class="xp-chips "><span>Python</span><span>Flask</span><span>SQLite</span><span>PWA</span><span>cPanel</span></div></div></details>
+<details class="xp reveal"><summary><span class="xp-date">Oct. 2024 à présent</span><span class="xp-role">Enseignant particulier en mathématiques</span><span class="xp-org">Indépendant, Rufisque</span></summary><div class="xp-body"><p>Accompagnement d'élèves de collège et de lycée.</p><ul><li>Évaluation des besoins de chaque élève pour partir du bon niveau.</li><li>Plans de progression individualisés.</li><li>Préparation aux examens.</li></ul><div class="xp-lbl">Stack</div><div class="xp-chips "><span>Pédagogie</span><span>Mathématiques</span></div></div></details>
+<details class="xp reveal"><summary><span class="xp-date">Mai 2023 à avr. 2025</span><span class="xp-role">Responsable Informatique</span><span class="xp-org">Multiservices Le Binaire, Rufisque</span></summary><div class="xp-body"><p>Responsable informatique d'une structure de services pendant deux ans.</p><ul><li>Support informatique de proximité pour les postes et les utilisateurs.</li><li>Gestion du réseau local.</li><li>Gestion des caméras de surveillance.</li><li>Numérisation et sécurisation des archives administratives.</li></ul><div class="xp-lbl">Résultats</div><div class="xp-chips res"><span>2 ans de terrain en production</span></div><div class="xp-lbl">Stack</div><div class="xp-chips "><span>Réseau local</span><span>Vidéosurveillance</span><span>Support</span><span>Sauvegarde</span></div></div></details>
+<details class="xp reveal"><summary><span class="xp-date">2023 à 2024</span><span class="xp-role">Assistant pédagogique</span><span class="xp-org">Université USSEIN</span></summary><div class="xp-body"><p>Encadrement d'étudiants en licence de mathématiques.</p><ul><li>Encadrement en analyse et en algèbre.</li><li>Création de supports numériques interactifs.</li></ul><div class="xp-lbl">Résultats</div><div class="xp-chips res"><span>+15 % de moyenne chez les étudiants suivis</span></div><div class="xp-lbl">Stack</div><div class="xp-chips "><span>Analyse</span><span>Algèbre</span></div></div></details>
+</div></section>
 
   <section id="competences">
     <div class="wrap">
@@ -1282,5 +1298,34 @@ if(term){var to=new IntersectionObserver(function(es){if(es[0].isIntersecting){t
 var fl=d.querySelectorAll('.x-flow span'),k=0;if(fl.length)setInterval(function(){fl.forEach(function(s){s.classList.remove('on');});fl[k%fl.length].classList.add('on');k++;},1100);
 })();
 </script>
-</body>
+<div id="xpal" data-theme="Changer de thème" data-lang="Passer en anglais"><div class="box"><input placeholder="Aller à… (Ctrl+K)"><div class="list"></div></div></div><script>
+(function(){var d=document;
+d.addEventListener('pointermove',function(e){var t=e.target.closest&&e.target.closest('.xp,.x-tile');if(!t)return;var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px');});
+var links=[].slice.call(d.querySelectorAll('.navlinks a[href^="#"]'));
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id);});}});},{rootMargin:'-40% 0px -55% 0px'});
+links.forEach(function(a){var s=d.querySelector(a.getAttribute('href'));if(s)so.observe(s);});
+var c=d.getElementById('xnet');
+if(c&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var x=c.getContext('2d'),W,H,P=[],m={x:-999,y:-999};
+function rs(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;P=[];var n=Math.min(70,Math.round(W*H/16000));for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35});}
+rs();addEventListener('resize',rs);c.parentNode.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();m.x=e.clientX-r.left;m.y=e.clientY-r.top;});
+(function f(){x.clearRect(0,0,W,H);var col=getComputedStyle(d.documentElement).getPropertyValue('--accent').trim()||'#2650A3';x.strokeStyle=col;x.fillStyle=col;
+P.forEach(function(p,i){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;x.globalAlpha=.7;x.beginPath();x.arc(p.x,p.y,1.8,0,6.3);x.fill();
+for(var j=i+1;j<P.length;j++){var q=P[j],dx=p.x-q.x,dy=p.y-q.y,dd=dx*dx+dy*dy;if(dd<14000){x.globalAlpha=.25*(1-dd/14000);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke();}}
+var mx=p.x-m.x,my=p.y-m.y,md=mx*mx+my*my;if(md<20000){x.globalAlpha=.5*(1-md/20000);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(m.x,m.y);x.stroke();}});requestAnimationFrame(f);})();}
+var pal=d.getElementById('xpal'),inp=pal.querySelector('input'),list=pal.querySelector('.list');
+var items=links.map(function(a){return {t:a.textContent,f:function(){location.hash=a.getAttribute('href');}};});
+items.push({t:'◐ '+pal.dataset.theme,f:function(){d.getElementById('themeBtn').click();}});
+items.push({t:'🌐 '+pal.dataset.lang,f:function(){location.href=d.querySelector('.x-tools a').getAttribute('href');}});
+items.push({t:'GitHub ↗',f:function(){open('https://github.com/SHERLOCKSOW','_blank');}});
+items.push({t:'LinkedIn ↗',f:function(){open('https://www.linkedin.com/in/moussa-sow-60426a379','_blank');}});
+var sel=0,cur=items;
+function draw(){list.innerHTML='';cur.forEach(function(it,i){var a=d.createElement('a');a.textContent=it.t;if(i===sel)a.className='sel';a.onclick=function(){go(i);};list.appendChild(a);});}
+function go(i){var it=cur[i];if(!it)return;pal.classList.remove('on');it.f();}
+function op(){pal.classList.add('on');inp.value='';cur=items;sel=0;draw();inp.focus();}
+addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();op();}else if(e.key==='Escape')pal.classList.remove('on');else if(pal.classList.contains('on')){if(e.key==='ArrowDown'){sel=Math.min(sel+1,cur.length-1);draw();e.preventDefault();}if(e.key==='ArrowUp'){sel=Math.max(sel-1,0);draw();e.preventDefault();}if(e.key==='Enter')go(sel);}});
+pal.onclick=function(e){if(e.target===pal)pal.classList.remove('on');};
+inp.oninput=function(){var q=inp.value.toLowerCase();cur=items.filter(function(i){return i.t.toLowerCase().indexOf(q)>-1;});sel=0;draw();};
+var kb=d.getElementById('palBtn');if(kb)kb.onclick=op;
+})();
+</script></body>
 </html>

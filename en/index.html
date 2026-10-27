@@ -339,7 +339,31 @@
 .x-flow span.on{background:var(--accent); color:#fff; border-color:var(--accent); transform:translateY(-2px);}
 .x-flow i{color:var(--ink-faint); font-style:normal;}
 </style>
-</head>
+<style>
+.xp{border:1px solid var(--line); background:var(--paper); margin-bottom:14px; transition:.25s; position:relative; overflow:hidden;}
+.xp:hover,.x-tile:hover{border-color:var(--accent);}
+.xp::before,.x-tile::before{content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:.3s; background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%), rgba(38,80,163,.10), transparent 70%);}
+.xp:hover::before,.x-tile:hover::before{opacity:1;} .x-tile{position:relative; overflow:hidden;}
+.xp summary{list-style:none; cursor:pointer; padding:18px 22px; display:grid; grid-template-columns:190px 1fr auto; gap:6px 20px; align-items:baseline;}
+.xp summary::-webkit-details-marker{display:none;}
+.xp summary::after{content:'+'; font-family:var(--mono); font-size:20px; color:var(--accent); grid-column:3; grid-row:1/3;}
+.xp[open] summary::after{content:'−';}
+.xp-date{font-family:var(--mono); font-size:12px; color:var(--ink-faint);}
+.xp-role{font-family:var(--display); font-weight:600; font-size:17px;}
+.xp-org{grid-column:2; font-family:var(--mono); font-size:12px; color:var(--accent);}
+.xp-body{padding:0 22px 22px 22px; margin-left:210px;} .xp-body p{color:var(--ink-soft); font-size:14px; margin-bottom:10px;}
+.xp-body ul{margin:0 0 14px 18px; color:var(--ink-soft); font-size:14px; line-height:1.65;}
+.xp-lbl{font-family:var(--mono); font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; margin:10px 0 6px;}
+.xp-chips{display:flex; flex-wrap:wrap; gap:7px;} .xp-chips span{font-family:var(--mono); font-size:12px; padding:4px 10px; border:1px solid var(--line);}
+.xp-chips.res span{background:rgba(38,80,163,.10); border-color:var(--accent); color:var(--accent-deep);}
+@media(max-width:760px){.xp summary{grid-template-columns:1fr auto;} .xp-org{grid-column:1;} .xp-body{margin-left:0;}}
+.hero{position:relative; overflow:hidden;} .hero>*{position:relative; z-index:1;} #xnet{position:absolute!important; inset:0; width:100%; height:100%; z-index:0!important; pointer-events:none; opacity:.55;}
+.navlinks a.active{color:var(--accent);}
+#xpal{position:fixed; inset:0; background:rgba(8,12,18,.55); z-index:300; display:none; align-items:flex-start; justify-content:center; padding-top:14vh;}
+#xpal.on{display:flex;} #xpal .box{width:min(560px,92vw); background:var(--paper); border:1px solid var(--line); box-shadow:0 20px 60px rgba(0,0,0,.35);}
+#xpal input{width:100%; padding:16px 18px; border:0; border-bottom:1px solid var(--line); background:none; color:var(--ink); font-family:var(--mono); font-size:15px; outline:none;}
+#xpal a{display:block; padding:11px 18px; font-family:var(--mono); font-size:13px; color:var(--ink-soft); cursor:pointer;} #xpal a.sel,#xpal a:hover{background:var(--paper-raised); color:var(--accent);}
+</style></head>
 <body>
 
 <header>
@@ -355,7 +379,7 @@
       <a href="#projets">Projects</a>
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
-      <span class="x-tools"><a href="../" hreflang="fr">FR</a><button id="themeBtn" aria-label="Theme">◐</button></span>
+      <span class="x-tools"><a href="../" hreflang="fr">FR</a><button id="palBtn" aria-label="Menu">⌘K</button><button id="themeBtn" aria-label="Theme">◐</button></span>
     </div>
     <button class="navtoggle" id="navtoggle" aria-label="Menu"><span></span></button>
   </nav>
@@ -363,7 +387,7 @@
 
 <main id="top">
 
-  <section class="hero" style="padding-bottom:0;">
+  <section class="hero" style="padding-bottom:0;"><canvas id="xnet" aria-hidden="true"></canvas>
     <div class="blueprint-bg"></div>
     <div class="wrap">
       <div class="hero-grid">
@@ -446,20 +470,12 @@
     </div>
   </section>
 
-  <section id="experience">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow">Expérience</div>
-        <h2>Parcours professionnel</h2>
-      </div>
-      <div class="timeline reveal">
-        <div class="tl-item"><div class="tl-date">15 Sep 2026 to present</div><div><div class="tl-role">Infrastructure Intern (Cloud &amp; DevOps)</div><div class="tl-org">InTouch</div><p>Deployment, maintenance and scaling of infrastructure hosted on Google Cloud, partly on AWS: Compute Engine, networking, Docker and Kubernetes, infrastructure as code with Terraform, Jinja2 templates and GitLab CI pipelines.</p></div></div>
-        <div class="tl-item"><div class="tl-date">Oct. 2024 à Présent</div><div><div class="tl-role">Enseignant particulier en mathématiques</div><div class="tl-org">Indépendant, Rufisque</div><p>Évaluation des besoins spécifiques d'élèves de collège et lycée, plans de progression individualisés, préparation aux examens.</p></div></div>
-        <div class="tl-item"><div class="tl-date">Mai 2023 à Avr. 2025</div><div><div class="tl-role">Responsable Informatique</div><div class="tl-org">Multiservices Le Binaire, Rufisque</div><p>Support informatique de proximité, gestion du réseau local, caméras de surveillance, sécurisation d'archives administratives numériques.</p></div></div>
-        <div class="tl-item"><div class="tl-date">2023 à 2024</div><div><div class="tl-role">Assistant pédagogique</div><div class="tl-org">Université USSEIN</div><p>Encadrement en analyse et algèbre, +15% de moyenne pour les étudiants suivis. Création de supports numériques interactifs.</p></div></div>
-      </div>
-    </div>
-  </section>
+  <section id="experience"><div class="wrap"><div class="section-head reveal"><div class="eyebrow">Experience</div><h2>What I actually did</h2></div><details class="xp reveal" open><summary><span class="xp-date">Sep 15, 2026 to present</span><span class="xp-role">Cloud &amp; DevOps Infrastructure Intern</span><span class="xp-org">InTouch</span></summary><div class="xp-body"><p>Infrastructure team of an environment hosted on Google Cloud, partly on AWS.</p><ul><li>Deploying and maintaining Compute Engine resources: networking, subnets and firewall rules.</li><li>Infrastructure written in Terraform, configurations generated with Jinja2 templates, for reproducible environments.</li><li>GitLab CI pipelines to build Docker images and deploy.</li><li>Deploying and running containerized applications on Kubernetes, with scaling.</li><li>Distributed systems mindset: availability, load balancing, day-to-day maintenance.</li></ul><div class="xp-lbl">Stack</div><div class="xp-chips "><span>GCP</span><span>AWS</span><span>Terraform</span><span>Kubernetes</span><span>Docker</span><span>GitLab CI</span><span>Jinja2</span></div></div></details>
+<details class="xp reveal" open><summary><span class="xp-date">Sep 2026</span><span class="xp-role">Freelance Full-Stack Developer</span><span class="xp-org">WayPoint Sénégal</span></summary><div class="xp-body"><p>Web data collection platform for a public administration, from design to production.</p><ul><li>Faithful web reproduction of two official Excel templates, with cascading lists and server-side validation.</li><li>Automatic Excel, Word and PDF exports, including a statistical report written from the figures.</li><li>Dashboard with about twenty charts, yearly filters, print layout.</li><li>Security: CSRF protection, PBKDF2 hashing, lockout after failed logins, access log.</li><li>Installable on phones (PWA), draft kept if the connection drops, three-level backups.</li><li>Audit of the official templates: five anomalies found and fixed, including a hidden module nobody had reported.</li><li>Hosting, SSL and production deployment on shared hosting.</li></ul><div class="xp-lbl">Results</div><div class="xp-chips res"><span>20,000 records tested</span><span>12 simultaneous agents, 0 failures</span><span>Excel export: 48 s → 7 s</span><span>245 fields modeled</span></div><div class="xp-lbl">Stack</div><div class="xp-chips "><span>Python</span><span>Flask</span><span>SQLite</span><span>PWA</span><span>cPanel</span></div></div></details>
+<details class="xp reveal"><summary><span class="xp-date">Oct 2024 to present</span><span class="xp-role">Private Mathematics Tutor</span><span class="xp-org">Independent, Rufisque</span></summary><div class="xp-body"><p>Coaching middle and high school students.</p><ul><li>Assessing each student's needs to start at the right level.</li><li>Individual progress plans.</li><li>Exam preparation.</li></ul><div class="xp-lbl">Stack</div><div class="xp-chips "><span>Teaching</span><span>Mathematics</span></div></div></details>
+<details class="xp reveal"><summary><span class="xp-date">May 2023 to Apr 2025</span><span class="xp-role">IT Manager</span><span class="xp-org">Multiservices Le Binaire, Rufisque</span></summary><div class="xp-body"><p>IT manager of a services company for two years.</p><ul><li>On-site IT support for workstations and users.</li><li>Local network management.</li><li>Surveillance camera management.</li><li>Digitizing and securing administrative archives.</li></ul><div class="xp-lbl">Results</div><div class="xp-chips res"><span>2 years of production experience</span></div><div class="xp-lbl">Stack</div><div class="xp-chips "><span>LAN</span><span>CCTV</span><span>Support</span><span>Backups</span></div></div></details>
+<details class="xp reveal"><summary><span class="xp-date">2023 to 2024</span><span class="xp-role">Teaching Assistant</span><span class="xp-org">USSEIN University</span></summary><div class="xp-body"><p>Tutoring undergraduate mathematics students.</p><ul><li>Tutoring in analysis and algebra.</li><li>Building interactive digital learning materials.</li></ul><div class="xp-lbl">Results</div><div class="xp-chips res"><span>+15% average grade for the students supported</span></div><div class="xp-lbl">Stack</div><div class="xp-chips "><span>Analysis</span><span>Algebra</span></div></div></details>
+</div></section>
 
   <section id="competences">
     <div class="wrap">
@@ -1282,5 +1298,34 @@ if(term){var to=new IntersectionObserver(function(es){if(es[0].isIntersecting){t
 var fl=d.querySelectorAll('.x-flow span'),k=0;if(fl.length)setInterval(function(){fl.forEach(function(s){s.classList.remove('on');});fl[k%fl.length].classList.add('on');k++;},1100);
 })();
 </script>
-</body>
+<div id="xpal" data-theme="Toggle theme" data-lang="Switch to French"><div class="box"><input placeholder="Go to… (Ctrl+K)"><div class="list"></div></div></div><script>
+(function(){var d=document;
+d.addEventListener('pointermove',function(e){var t=e.target.closest&&e.target.closest('.xp,.x-tile');if(!t)return;var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px');});
+var links=[].slice.call(d.querySelectorAll('.navlinks a[href^="#"]'));
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id);});}});},{rootMargin:'-40% 0px -55% 0px'});
+links.forEach(function(a){var s=d.querySelector(a.getAttribute('href'));if(s)so.observe(s);});
+var c=d.getElementById('xnet');
+if(c&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var x=c.getContext('2d'),W,H,P=[],m={x:-999,y:-999};
+function rs(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;P=[];var n=Math.min(70,Math.round(W*H/16000));for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35});}
+rs();addEventListener('resize',rs);c.parentNode.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();m.x=e.clientX-r.left;m.y=e.clientY-r.top;});
+(function f(){x.clearRect(0,0,W,H);var col=getComputedStyle(d.documentElement).getPropertyValue('--accent').trim()||'#2650A3';x.strokeStyle=col;x.fillStyle=col;
+P.forEach(function(p,i){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;x.globalAlpha=.7;x.beginPath();x.arc(p.x,p.y,1.8,0,6.3);x.fill();
+for(var j=i+1;j<P.length;j++){var q=P[j],dx=p.x-q.x,dy=p.y-q.y,dd=dx*dx+dy*dy;if(dd<14000){x.globalAlpha=.25*(1-dd/14000);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke();}}
+var mx=p.x-m.x,my=p.y-m.y,md=mx*mx+my*my;if(md<20000){x.globalAlpha=.5*(1-md/20000);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(m.x,m.y);x.stroke();}});requestAnimationFrame(f);})();}
+var pal=d.getElementById('xpal'),inp=pal.querySelector('input'),list=pal.querySelector('.list');
+var items=links.map(function(a){return {t:a.textContent,f:function(){location.hash=a.getAttribute('href');}};});
+items.push({t:'◐ '+pal.dataset.theme,f:function(){d.getElementById('themeBtn').click();}});
+items.push({t:'🌐 '+pal.dataset.lang,f:function(){location.href=d.querySelector('.x-tools a').getAttribute('href');}});
+items.push({t:'GitHub ↗',f:function(){open('https://github.com/SHERLOCKSOW','_blank');}});
+items.push({t:'LinkedIn ↗',f:function(){open('https://www.linkedin.com/in/moussa-sow-60426a379','_blank');}});
+var sel=0,cur=items;
+function draw(){list.innerHTML='';cur.forEach(function(it,i){var a=d.createElement('a');a.textContent=it.t;if(i===sel)a.className='sel';a.onclick=function(){go(i);};list.appendChild(a);});}
+function go(i){var it=cur[i];if(!it)return;pal.classList.remove('on');it.f();}
+function op(){pal.classList.add('on');inp.value='';cur=items;sel=0;draw();inp.focus();}
+addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();op();}else if(e.key==='Escape')pal.classList.remove('on');else if(pal.classList.contains('on')){if(e.key==='ArrowDown'){sel=Math.min(sel+1,cur.length-1);draw();e.preventDefault();}if(e.key==='ArrowUp'){sel=Math.max(sel-1,0);draw();e.preventDefault();}if(e.key==='Enter')go(sel);}});
+pal.onclick=function(e){if(e.target===pal)pal.classList.remove('on');};
+inp.oninput=function(){var q=inp.value.toLowerCase();cur=items.filter(function(i){return i.t.toLowerCase().indexOf(q)>-1;});sel=0;draw();};
+var kb=d.getElementById('palBtn');if(kb)kb.onclick=op;
+})();
+</script></body>
 </html>
